@@ -1,0 +1,106 @@
+<app-header></app-header>
+<div class="container-fluid product-form cover-screen">
+	<div class="container">
+		<form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+			<div class="row  product-add">
+				<div class="text-center col-12 logo-set">
+					<p class="account-text"> Add Your Product </p>
+				</div>
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 left-section ">
+					<div class="row form-section">
+					    <div class="col-12 col-sm-12 col-lg-6 col-md-6 form-group">
+					    	<label for="name">Enter item name</label>
+					      	<input type="text" formControlName="name" name="name" class="form-control lft-input" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+					      	<div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Name is required</div>
+                            </div>
+					    </div>
+					    <div class="col-12 col-sm-12 col-lg-6 col-md-6 form-group">
+					    	<label for="price">Enter price</label>
+					      	<input type="number" formControlName="price" [OnlyNumber] name="price" class="form-control lft-input" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.price.errors }" />
+					      	<div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                                <div *ngIf="f.price.errors.required">Price is required</div>
+                            </div>
+					    </div>
+					    <div class="form-group col-12 col-lg-12 col-sm-12 col-md-12  textarea-height">
+					    	<label for="description">Enter Description</label>
+							<textarea [ngClass]="{ 'is-invalid': submitted && f.description.errors }" formControlName="description" name="description" class="form-control" rows="5" placeholder=""></textarea>
+							<div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                                <div *ngIf="f.description.errors.required">Description is required</div>
+                            </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 right-upload-section">
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-6 col-lg-6  lg-choose-photo">
+							<h4>Choose Photo</h4>
+							<div class="row">							
+								<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+									<div class="image-upload">								
+										<button *ngIf="f.image1.value" type="button" class="btn btn-del" (click)="deleteImage(f.image1,f.image1_full)">
+											<i class="fa fa-trash trash-icon" ></i>
+										</button>
+										<label [attr.for]="(!f.image1.value)?'file-input':''" class="input-lable" (click)="loadImage(f.image1,f.image1_full)">
+											<img [src]="f.image1.value ? f.image1.value : 'assets/images/dummy.png'" style="pointer-events: none"/>
+								 			<span class="cover-text">Cover</span>
+								  		</label>
+										<input id="file-input" (change)="fileChangeEvent($event,f.image1,f.image1_full)" type="file" />
+									</div>
+								</div>
+								<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+									<div class="image-upload">								
+										<button *ngIf="f.image2.value" type="button" class="btn btn-del" (click)="deleteImage(f.image2,f.image2_full)">
+											<i class="fa fa-trash trash-icon" ></i>
+										</button>
+										<label [attr.for]="(!f.image2.value)?'file-input2':''" class="input-lable" (click)="loadImage(f.image2,f.image2_full)">
+											<img [src]="f.image2.value ? f.image2.value : 'assets/images/dummy.png'" style="pointer-events: none"/>
+								 		</label>
+										<input id="file-input2" (change)="fileChangeEvent($event,f.image2,f.image2_full)" type="file" />
+									</div>
+								</div>
+								<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+									<div class="image-upload">								
+										<button *ngIf="f.image3.value" type="button" class="btn btn-del" (click)="deleteImage(f.image3,f.image3_full)">
+											<i class="fa fa-trash trash-icon" ></i>
+										</button>
+										<label [attr.for]="(!f.image3.value)?'file-input3':''" class="input-lable" (click)="loadImage(f.image3,f.image3_full)">
+											<img [src]="f.image3.value ? f.image3.value : 'assets/images/dummy.png'" style="pointer-events: none"/>
+								 		</label>
+										<input id="file-input3" (change)="fileChangeEvent($event,f.image3,f.image3_full)" type="file" />
+									</div>
+								</div>
+								<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+									<div class="image-upload">								
+										<button *ngIf="f.image4.value" type="button" class="btn btn-del" (click)="deleteImage(f.image4,f.image4_full)">
+											<i class="fa fa-trash trash-icon" ></i>
+										</button>
+										<label [attr.for]="(!f.image4.value)?'file-input4':''" class="input-lable" (click)="loadImage(f.image4,f.image4_full)">
+											<img [src]="f.image4.value ? f.image4.value : 'assets/images/dummy.png'" style="pointer-events: none"/>
+								 		</label>
+										<input id="file-input4" (change)="fileChangeEvent($event,f.image4,f.image4_full)" type="file" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+					 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					 				<div *ngIf="submitted && f.image1.errors" class="error">
+		                            	<div *ngIf="f.image1.errors.required">Cover Image is required.</div>
+		                        	</div>
+					 			</div>
+							</div>
+						</div>
+						<div class="col-12 col-sm-12 col-md-6 col-lg-6 right-side-imgs">
+							<app-cropit (save)="SavedFile($event)"></app-cropit>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center last-button-section">
+					<a class="btn btn-cancel" [routerLink]="['/products/mylist']">Cancel</a>
+					<button type="submit" [ladda]="loading" class="btn btn-submit "> Submit </button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div> 
+<app-footer></app-footer>
